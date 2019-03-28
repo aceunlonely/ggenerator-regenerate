@@ -1,0 +1,2 @@
+# ggenerator-regenerate
+ggr  is regenerating implement for gg
