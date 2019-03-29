@@ -1,0 +1,11 @@
+{
+    "seeds":[
+        {
+            "name":"demo01.txt",
+            "path":"1/demo01.txt",
+            "rarea" : [
+                
+            ]
+        }
+    ]
+}

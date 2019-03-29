@@ -6,4 +6,3 @@ ggr  is regenerating implement for gg
 ![](docs/ggr.png)
 
 
-

@@ -20,8 +20,11 @@
   "bugs": {
     "url": "https://github.com/aceunlonely/ggenerator-regenerate/issues"
   },
-  "bin":{
-    "ggr" : "bin/ggr"
+  "bin": {
+    "ggr": "bin/ggr"
   },
-  "homepage": "https://github.com/aceunlonely/ggenerator-regenerate#readme"
+  "homepage": "https://github.com/aceunlonely/ggenerator-regenerate#readme",
+  "dependencies": {
+    "find": "^0.3.0"
+  }
 }
