@@ -15,7 +15,8 @@ exports.dig =(rootPath,options)=>{
     return LiSAP.assignBatch(ele=>{
         return {
             name: path.basename(ele),
-            path: ele,
+            // here is  relative path
+            path: path.relative(rootPath,ele),
             rarea: rareaEngine.extract(fs.readFileSync(ele,{encoding :options.encoding}))
         }
     }, files)

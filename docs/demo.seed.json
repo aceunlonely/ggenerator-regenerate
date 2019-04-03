@@ -4,7 +4,12 @@
             "name":"demo01.txt",
             "path":"1/demo01.txt",
             "rarea" : [
-                
+                { 
+                    "name" : "[head]",
+                    "startIndex" : 24,
+                    "endIndex": 328,
+                    "area" : "name"
+                }
             ]
         }
     ]
