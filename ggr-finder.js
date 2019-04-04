@@ -3,6 +3,10 @@ const find = require('find')
 const LiSAP = require('lisa.promise')(2)
 
 
+const getMatchHole = ()=>{
+
+}
+
 exports.find = (rootPath,seed,options)=>{
     options = options || {}
     options.area_placeholder = options.area_placeholder || config.area_placeholder
@@ -23,15 +27,23 @@ exports.find = (rootPath,seed,options)=>{
                     "name" : "[head]",
                     "startIndex" : 24,
                     "endIndex": 328,
-                    "area" : "name"
+                    "area" : "namexx"
                 }
             ]
         }
         */
-        find.file(new RegExp('^'+seed.name + '$'), rootPath, files => {
-            
-            console.log(files)
-        })
-        return 'aa'
+       return new Promise((r,j)=>{
+            find.file(new RegExp('^'+seed.name + '$'), rootPath, files => {
+                if(files.length == 0){
+                    if(options.debug){
+                        console.debug('ggr.finder.find debug @ findFile : cant find file :' + seed.name)
+                    }
+                    r()
+                }else{
+                    r(getMatchHole(files))
+                }
+            })
+       })
+
     }, seed.seeds)
 }
