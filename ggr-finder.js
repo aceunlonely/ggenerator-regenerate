@@ -1,10 +1,22 @@
 const config = require('./config.json')
 const find = require('find')
 const LiSAP = require('lisa.promise')(2)
+const path = require('path')
 
 
-const getMatchHole = ()=>{
-
+const getMatchHole = (files,seed,rootPath)=>{
+    var ySeedArray = [] 
+    for(var index=0;index<files.length;i++){
+        var file = files[index]
+        ySeedArray.push({
+            // here is  relative path
+            path:  path.relative(rootPath,file),
+            rarea: rareaEngine.extract(fs.readFileSync(ele,{encoding :options.encoding}))
+        })
+    }
+    //compare path
+    
+    //compare rarea
 }
 
 exports.find = (rootPath,seed,options)=>{
@@ -40,7 +52,7 @@ exports.find = (rootPath,seed,options)=>{
                     }
                     r()
                 }else{
-                    r(getMatchHole(files))
+                    r(getMatchHole(files,seed,rootPath))
                 }
             })
        })
