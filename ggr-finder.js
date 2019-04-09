@@ -2,7 +2,32 @@ const config = require('./config.json')
 const find = require('find')
 const LiSAP = require('lisa.promise')(2)
 const path = require('path')
+const util = require('./util')
 
+
+const getMatchHoleInner = (ySeedArray,seed)=>{
+    // get match data
+    ySeedArray.forEach(ele=>{
+        //compare path
+        ele.nameMatchLength = util.stringRightIntersection(ele.path, seed.path).length
+        //compare rarea
+        ele.rareaMatchCount = util.arrayIntersectionCount(ele.rarea,seed.rarea,(a1,a2)=>{
+            return a1.name === a2.name
+        })
+    })
+
+    // get best match one
+    ySeedArray.filter((value, index, array) => {
+        return value.rareaMatchCount > 0
+    })
+    if(!ySeedArray) return null
+    var sortedYSeedArray = ySeedArray.sort((a,b)=>{ return a.nameMatchLength > b.nameMatchLength })
+    return {
+        name : seed.name,
+        path : sortedYSeedArray[0].path,
+        rarea : sortedYSeedArray[0].rarea
+    }
+}
 
 const getMatchHole = (files,seed,rootPath)=>{
     var ySeedArray = [] 
@@ -14,9 +39,7 @@ const getMatchHole = (files,seed,rootPath)=>{
             rarea: rareaEngine.extract(fs.readFileSync(ele,{encoding :options.encoding}))
         })
     }
-    //compare path
-    
-    //compare rarea
+    return getMatchHoleInner(ySeedArray,seed)
 }
 
 exports.find = (rootPath,seed,options)=>{
@@ -59,3 +82,8 @@ exports.find = (rootPath,seed,options)=>{
 
     }, seed.seeds)
 }
+
+
+
+
+exports.testInner = getMatchHoleInner

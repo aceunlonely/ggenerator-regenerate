@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/aceunlonely/ggenerator-regenerate#readme",
   "dependencies": {
+    "debug": "^4.1.1",
     "find": "^0.3.0",
     "lisa.promise": "^1.0.1"
   }
