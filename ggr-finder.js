@@ -17,16 +17,22 @@ const getMatchHoleInner = (ySeedArray,seed)=>{
     })
 
     // get best match one
-    ySeedArray.filter((value, index, array) => {
+    ySeedArray = ySeedArray.filter((value, index, array) => {
         return value.rareaMatchCount > 0
     })
     if(!ySeedArray) return null
-    var sortedYSeedArray = ySeedArray.sort((a,b)=>{ return a.nameMatchLength > b.nameMatchLength })
-    return {
-        name : seed.name,
-        path : sortedYSeedArray[0].path,
-        rarea : sortedYSeedArray[0].rarea
-    }
+    var sortedYSeedArray = ySeedArray.sort((a,b)=>{ return a.nameMatchLength < b.nameMatchLength })
+    if(sortedYSeedArray.length>1)
+        console.log('warning:ggr:finder:getMatchHoleInner:match count:' + sortedYSeedArray.length)
+    var result = []
+    sortedYSeedArray.forEach(ele=>{
+        result.push({
+            name : seed.name,
+            path : ele.path,
+            rarea : ele.rarea
+        })
+    })
+    return result
 }
 
 const getMatchHole = (files,seed,rootPath)=>{
