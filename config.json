@@ -3,6 +3,5 @@
     "fileTypes" : "zip,rar,7z,tar,gz,iso,doc,docx,pdf,wps,odf,png,gif,jpg" ,
     "queue" : 2 ,
     "area_placeholder" : "hellohellogoodday",
-    "debug" : false,
     "encoding" : "utf8"
 }

@@ -3,7 +3,7 @@ const find = require('find')
 const LiSAP = require('lisa.promise')(2)
 const path = require('path')
 const util = require('./util')
-
+const debug = require('debug')('ggr')
 
 const getMatchHoleInner = (ySeedArray,seed)=>{
     // get match data
@@ -22,8 +22,9 @@ const getMatchHoleInner = (ySeedArray,seed)=>{
     })
     if(!ySeedArray) return null
     var sortedYSeedArray = ySeedArray.sort((a,b)=>{ return a.nameMatchLength < b.nameMatchLength })
-    if(sortedYSeedArray.length>1)
-        console.log('warning:ggr:finder:getMatchHoleInner:match count:' + sortedYSeedArray.length)
+    if(sortedYSeedArray.length>1){
+        debug('warning:ggr:finder:getMatchHoleInner:match count:%o', sortedYSeedArray.length)
+    }
     var result = []
     sortedYSeedArray.forEach(ele=>{
         result.push({
@@ -51,11 +52,9 @@ const getMatchHole = (files,seed,rootPath)=>{
 exports.find = (rootPath,seed,options)=>{
     options = options || {}
     options.area_placeholder = options.area_placeholder || config.area_placeholder
-    options.debug = options.debug || config.debug
     //check param
     if(!seed || !seed.seeds){
-        if(options.debug)
-            console.error('ggr.finder.find error @ param : seed cannot be null')
+        debug('ggr.finder.find error @ param : seed cannot be null rootPath: %o', rootPath)
         return null
     }
     return LiSAP.assignBatch(seed=>{
@@ -79,8 +78,9 @@ exports.find = (rootPath,seed,options)=>{
                     if(options.debug){
                         console.debug('ggr.finder.find debug @ findFile : cant find file :' + seed.name)
                     }
-                    r()
+                    r([])
                 }else{
+                    //like 'demo.hole.json' 's 'holes'
                     r(getMatchHole(files,seed,rootPath))
                 }
             })
@@ -88,8 +88,5 @@ exports.find = (rootPath,seed,options)=>{
 
     }, seed.seeds)
 }
-
-
-
 
 exports.testInner = getMatchHoleInner

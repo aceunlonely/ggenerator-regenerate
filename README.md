@@ -6,3 +6,10 @@ ggr  is regenerating implement for gg
 ![](docs/ggr.png)
 
 
+## show debug info
+
+```bash
+set DEBUG=*,-not_this
+$env:DEBUG = "*,-not_this"
+
+```

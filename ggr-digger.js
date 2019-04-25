@@ -22,6 +22,7 @@ exports.dig =(rootPath,options)=>{
     }, files)
     .action()
     .then(seeds =>{
+        // like demo.seed.json
         return { seeds :seeds.filter(value=>{return value ? true : false}) }
     })
 }
